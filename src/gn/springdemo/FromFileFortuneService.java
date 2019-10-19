@@ -2,6 +2,7 @@ package gn.springdemo;
 
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,11 +11,19 @@ import java.util.Random;
 @Component
 public class FromFileFortuneService implements FortuneService {
 
-    private String fileName = "fortunes.txt";
     private List <String> fortunes;
     private Random random = new Random();
 
     public FromFileFortuneService() {
+        System.out.println(">> FromFileFortuneService: inside default constructor");
+    }
+
+    @PostConstruct
+    public void readFortunesFromFile() {
+
+        System.out.println(">> FileFortuneService: inside method readFortunesFromFile");
+
+        String fileName = "fortunes.txt";
         File file = new File(fileName);
 
         System.out.println("Reading fortunes from file: " + file);
