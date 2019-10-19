@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import java.io.FileNotFoundException;
+
 @Component
 public class TennisCoach implements Coach {
 
-    @Qualifier("randomFortuneService")
+    @Qualifier("fromFileFortuneService")
     @Autowired
     private FortuneService fortuneService;
 
@@ -35,7 +37,7 @@ public class TennisCoach implements Coach {
     }
 
     @Override
-    public String getDailyFortune() {
+    public String getDailyFortune() throws FileNotFoundException {
         return fortuneService.getFortune();
     }
 }
